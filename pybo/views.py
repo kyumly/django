@@ -2,16 +2,20 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .forms import QuestionForm, AnswerForm
 from django.http import HttpResponseNotAllowed
+from django.core.paginator import Paginator
 
 
 from django.http import HttpResponse
 
 
 def index(request):
+    page = request.GET.get('page', '1')
     #question_list =  Question.objects.all().order_by('-create_date')
     question_list =  Question.objects.order_by('-create_date')
-    context = {'question_list': question_list}
-    print(question_list)
+    paginator = Paginator(question_list, 10)    #페이지당 10개 씩 보여주기
+    page_obj = paginator.get_page(page)
+    print(page_obj)
+    context = {'question_list': page_obj}
     #return HttpResponse("안녕하세요 pybo에 오신것을 환영합니다.")
     return render(request, 'pybo/question_list.html', context)
 
