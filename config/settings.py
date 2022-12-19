@@ -27,10 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# 로그인 성공 후 이동하는 URL
+LOGIN_REDIRECT_URL =  '/'
+
+#로그아웃 시 이동하는 URL
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Application definition
-
 INSTALLED_APPS = [
+    'common.apps.CommonConfig',
     'pybo.apps.PyboConfig',
     'django.contrib.admin',
     'django.contrib.auth',
