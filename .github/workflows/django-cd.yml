@@ -20,6 +20,6 @@ jobs:
           password : ${{secrets.PASSWORD}}
           port: 22
           script: |
-            cd /home/ubuntu/django_zero_to_instagram_devops_youtube
+            cd /home/inhatc/code/django
             git pull
             python manage.py runserver 0.0.0.0:80 &
