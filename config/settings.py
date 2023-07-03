@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-y%oa%1&g#gp5ow71bbh$6m2@q@jf58@^4q5o(@sh66jetdthct
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # 로그인 성공 후 이동하는 URL
 LOGIN_REDIRECT_URL =  '/'
@@ -52,6 +52,15 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+
+STATIC_ROOT = BASE_DIR / 'static/'
+# if DEBUG:
+#     STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+#     #print(STATICFILES_DIRS)
+# else:
+#     STATIC_ROOT = BASE_DIR /"static/"
+#     print(STATIC_ROOT)
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
