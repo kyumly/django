@@ -10,7 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
       - name: connect ec2
         uses: appleboy/ssh-action@master
