@@ -1,3 +1,3 @@
-FROM nginx:latest
+FROM nginx:1.19-alpine
 
-COPY
+COPY ./django-nginx-compose.conf /etc/nginx/conf.d
