@@ -9,12 +9,16 @@ services:
     container_name: "write-djngo"
 
     restart: always
+
+    networks:
+      our_Net:
+          ipv4_address: 172.168.100.2
+
     expose:
       - "8000"
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
 
-
-  nginx :
+  nginx:
     build:
       context: nginx-server
       dockerfile: dockerfile
@@ -22,3 +26,20 @@ services:
       - "8082:8080"
     depends_on:
       - backend
+
+    networks:
+      our_Net:
+          ipv4_address: 172.168.100.3
+
+networks:
+  our_Net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.168.100.0/24
+          gateway: 172.168.100.1
+
+#외부 네트워크 설정
+#  pas :
+#    external:
+#      name : django_our_net
