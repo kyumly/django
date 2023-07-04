@@ -30,6 +30,8 @@ services:
     depends_on:
       - backend
 
+    volumes:
+      - /Users/kim-seung-gyeom/Desktop/inhatc_eductaion/겨울방학/장고/django/static:/static
     networks:
       our_Net:
           ipv4_address: 172.168.100.3

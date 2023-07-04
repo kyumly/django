@@ -29,7 +29,8 @@ services:
       - "80:8080"
     depends_on:
       - backend
-
+    volumes:
+      - /home/inhatc/code/django/static:/static
     networks:
       our_Net:
           ipv4_address: 172.168.100.3
