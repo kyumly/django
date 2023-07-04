@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-y%oa%1&g#gp5ow71bbh$6m2@q@jf58@^4q5o(@sh66jetdthct
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["django"]
 
 # 로그인 성공 후 이동하는 URL
 LOGIN_REDIRECT_URL =  '/'
@@ -46,14 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    os.path.join(BASE_DIR, "static")
 ]
-
-STATIC_ROOT = BASE_DIR / 'static/'
 # if DEBUG:
 #     STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 #     #print(STATICFILES_DIRS)
@@ -96,11 +97,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env')
+
+postgres_init_database = {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': env('POSTGRES_NAME'),
+    'USER': env('POSTGRES_USER'),
+    'PASSWORD': env('POSTGRES_PASSWORD'),
+    'HOST': env('POSTGRES_HOST'),
+    'PORT': env('POSTGRES_PORT'),
+}
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': postgres_init_database
 }
 
 

@@ -37,7 +37,7 @@ services:
   db :
     image: postgres:15-alpine
     volumes:
-      -/home/inhatc/db/post:/var/lib/postgresql/data
+      - /Users/kim-seung-gyeom/Desktop/inhatc_eductaion/겨울방학/장고/postgrasql:/var/lib/postgresql/data
     env_file:
       - .env.postgres
 
