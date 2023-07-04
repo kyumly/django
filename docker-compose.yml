@@ -30,7 +30,7 @@ services:
     depends_on:
       - backend
     volumes:
-      - static:/static
+      - ./static:/static
     networks:
       our_Net:
           ipv4_address: 172.168.100.3
