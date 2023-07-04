@@ -14,8 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.urls import path, include
+from django.views.static import serve
+
+from config import settings
 from pybo.views import base_views
 
 from pybo import views
@@ -24,5 +27,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pybo/', include('pybo.urls')),
     path('common', include('common.urls')),
-    path('', base_views.index, name='index')
+    path('', base_views.index, name='index'),
+
+#     # URL
+#     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
