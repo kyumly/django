@@ -26,7 +26,7 @@ services:
       context: nginx-server
       dockerfile: dockerfile
     ports:
-      - "8082:8080"
+      - "80:8080"
     depends_on:
       - backend
 
@@ -37,7 +37,7 @@ services:
   db :
     image: postgres:15-alpine
     volumes:
-      -/home/inhatc/db/post:/var/lib/postgresql/data
+      - /home/inhatc/db/post:/var/lib/postgresql/data
     env_file:
       - .env.postgres
 
